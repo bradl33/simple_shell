@@ -4,42 +4,40 @@
 
 int main(int argc, char **argv) {
     char *lineptr = NULL;
-    size_t n = 0;
-    ssize_t nchars_read;
-    const char *delim = " \n";
-    int i;
+    char *tokens[MAX_TOKENS] = {NULL};
+    size_t n, command_num;
+    int i, status = 0, num_tokens;
+
+    n = command_num = 0;
 
     (void)argc;
     (void)argv;
 
     while (1) {
+        command_num++;
         prompt();
-        nchars_read = getline(&lineptr, &n, stdin);
-        
-        if (nchars_read == -1) {
-            printf("\nexit\n");
-            break;
-        } else {
-            char *tokens[MAX_TOKENS] = {NULL};
-            int num_tokens = 0;
+        my_getline(&lineptr, &n, status);
+        num_tokens = tokenize_input(lineptr, tokens);
 
-            char *token = strtok(lineptr, delim);
-            while (token != NULL && num_tokens < MAX_TOKENS) {
-                tokens[num_tokens] = strdup(token);
-                num_tokens++;
-                token = strtok(NULL, delim);
+        if (num_tokens > 0) {
+            if (strcmp(tokens[0], "exit") == 0) {
+                break;
             }
+            execute_command(tokens);
+        }
 
-            if(num_tokens > 0) {
-                execute_command(tokens);
-            }
-
-            /* printf("\ntokens: %d\n", num_tokens); */
-
-            for (i = 0; i < num_tokens; i++) {
-                /* printf("%s\n", tokens[i]); */
+        for (i = 0; i < num_tokens; i++) {
+            if (tokens[i] != NULL) {
                 free(tokens[i]);
+                tokens[i] = NULL;
             }
+        }
+    }
+
+    for (i = 0; i < num_tokens; i++) {
+        if (tokens[i] != NULL) {
+            free(tokens[i]);
+            tokens[i] = NULL;
         }
     }
 

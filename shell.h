@@ -12,5 +12,7 @@
 void prompt(void);
 void execute_command(char **argv);
 char *get_cmd_path(char *command);
+ssize_t my_getline(char **input, size_t *n, int status);
+int tokenize_input(char *lineptr, char *tokens[]);
 
 #endif
