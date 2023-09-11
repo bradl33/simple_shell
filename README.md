@@ -1,80 +1,55 @@
 # simple_shell
-More Info
-Output
-Unless specified otherwise, your program must have the exact same output as sh (/bin/sh) as well as the exact same error output.
-The only difference is when you print an error, the name of the program must be equivalent to your argv[0] (See below)
-Example of error with sh:
+**Ghost Shell**
+Ghost Shell also known as the shell is a simple command line prompt that takes the most basics of commands that are present in the bash shell and runs them an dit was built as a project for Holberton school.
+`The shell` works like bash and any other basic shells.
+**Example of how to launch the shell after compiling:**
+`./shell`
+Output: prompt to terminal: `$`
+**Syntax**
+The shell works by using commands given by the user input. The shell commands take in the following syntax:  ``command name {arguments}``. The shell executes a command after it is written by user using the command followed by the arguments.
 
-$ echo "qwerty" | /bin/sh
-/bin/sh: 1: qwerty: not found
-$ echo "qwerty" | /bin/../bin/sh
-/bin/../bin/sh: 1: qwerty: not found
-$
-Same error with your program hsh:
+``cat holberton.h`` The above example takes in a command by the user followed with the arguments. In this case the command is ``cat`` (to view file without opening file) followed by argument the file name in this case ``holberton.h``.
 
-$ echo "qwerty" | ./hsh
-./hsh: 1: qwerty: not found
-$ echo "qwerty" | ./././hsh
-./././hsh: 1: qwerty: not found
-$
+For more information on cat, you can use the ``man`` command which will show a manual of the given command or any command you wish to know more information on. It contains system calls, libraries and other important files.
 
-List of allowed functions and system calls
-access (man 2 access)
-chdir (man 2 chdir)
-close (man 2 close)
-closedir (man 3 closedir)
-execve (man 2 execve)
-exit (man 3 exit)
-_exit (man 2 _exit)
-fflush (man 3 fflush)
-fork (man 2 fork)
-free (man 3 free)
-getcwd (man 3 getcwd)
-getline (man 3 getline)
-getpid (man 2 getpid)
-isatty (man 3 isatty)
-kill (man 2 kill)
-malloc (man 3 malloc)
-open (man 2 open)
-opendir (man 3 opendir)
-perror (man 3 perror)
-read (man 2 read)
-readdir (man 3 readdir)
-signal (man 2 signal)
-stat (__xstat) (man 2 stat)
-lstat (__lxstat) (man 2 lstat)
-fstat (__fxstat) (man 2 fstat)
-strtok (man 3 strtok)
-wait (man 2 wait)
-waitpid (man 2 waitpid)
-wait3 (man 2 wait3)
-wait4 (man 2 wait4)
-write (man 2 write)
-Compilation
-Your shell will be compiled this way:
+The shell also contains two builtins which are commands that are within the shell itself. The two builtins are ``exit`` and ``env``. You can also use ``help`` command to know which builtins are provided by the shell. The ``help`` command works similarly to the manual where it provides further detail or information on given builtin.
+**Compilation**
+All files will be compiled with the following: ``$ gcc -Wall -Werror -Wextra -pedantic *.c``
+**List of useful commands**
+1.``cat`` - prints and concatenates files to the standard output.
+2.``cp`` -copies a file into another file.
+3.``grep`` - helps to search for a file in a specific pattern.
+4.``less`` - will let you go backward and forward in the files.
+5.``ls`` - will list all files and directories in current working directory.
+6. ``mv`` - helps to move one file into another file.
+7. ``pwd`` - given you the current working directory
+**Builtins**
+There are two builtins programmed into the shell. Below is a description and use for each builtin.
 
-gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
-Testing
-Your shell should work like this in interactive mode:
+``env`` - The env command is a command that tells the shell program to display all of the environment variables with their values. It is a way to access those values through the shell.
 
-$ ./hsh
-($) /bin/ls
-hsh main.c shell.c
-($)
-($) exit
-$
-But also in non-interactive mode:
+``exit`` - If you wish to exit out of the shell the user can use the builtin ``exit``.
 
-$ echo "/bin/ls" | ./hsh
-hsh main.c shell.c test_ls_2
-$
-$ cat test_ls_2
-/bin/ls
-/bin/ls
-$
-$ cat test_ls_2 | ./hsh
-hsh main.c shell.c test_ls_2
-hsh main.c shell.c test_ls_2
-$
-Checks
-The Checker will be released at the end of the project (1-2 days before the deadline). We strongly encourage the entire class to work together to create a suite of checks covering both regular tests and edge cases for each task. See task 8. Test suite.
+**Exiting commands and the shell
+**
+To exit out of a command or process the user can use ``ctrl c``. ``Control c`` stops a process and causes it to abort. The user can also utilize the command ``ctrl D`` which will just exit. When the command ``ctrl D`` is used an exit status of 0 is given. Using exit, you can input its exit status or it is defaulted to the status of the last command executed.
+**Files**
+
+``README.md` : Current file, contains information about this project
+``holberton.h`` : Header file, contains all prototypes for funcitons used, as well as libriaries
+``hsh.c``: Main file that uses most functions and executes them within this file
+``ghostinshell.png``: Image in readme file
+``_getenv.c`` : Contains the code for _printf
+``_getline.c``: File for getting prompt and user input
+``which.c``: File containing the specific functions for conversion specifiers
+``builtin_execute.c``: Executing the builtins
+``builtins.c``: File containing the two builtins
+``child.c``: File that forks and creates parent child processee
+``free.c``: File with free malloc functions
+``prompt.c``: File with actual prompt line $
+``tokenizer.c``: File that creates function to tokenize an array of strings
+``utility_functions.c``: helper functions.
+**Comments**
+**Authors**
+Bradley mwangangi.
+Bryan sine.
