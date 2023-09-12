@@ -1,0 +1,6 @@
+TEST_SUITE
+allowed_functions
+runchecker.bash
+.vscode
+alx_test_suite
+hsh

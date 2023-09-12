@@ -6,9 +6,9 @@ int main(int argc, char **argv) {
     char *lineptr = NULL;
     char *tokens[MAX_TOKENS] = {NULL};
     size_t n, command_num;
-    int i, status = 0, num_tokens;
+    int i, status, num_tokens;
 
-    n = command_num = 0;
+    n = command_num = status = 0;
 
     (void)argc;
     (void)argv;
@@ -20,27 +20,32 @@ int main(int argc, char **argv) {
         num_tokens = tokenize_input(lineptr, tokens);
 
         if (num_tokens > 0) {
-            if (strcmp(tokens[0], "exit") == 0) {
-                break;
+            if (is_builtin_command(tokens[0])) {
+                execute_builtin_command(tokens);
+            } else {
+                execute_non_builtin_command(tokens);
             }
-            execute_command(tokens);
         }
 
+        
         for (i = 0; i < num_tokens; i++) {
             if (tokens[i] != NULL) {
                 free(tokens[i]);
                 tokens[i] = NULL;
             }
         }
+    
     }
 
+    
     for (i = 0; i < num_tokens; i++) {
         if (tokens[i] != NULL) {
             free(tokens[i]);
             tokens[i] = NULL;
         }
     }
-
+    
     free(lineptr);
+    
     return 0;
 }
