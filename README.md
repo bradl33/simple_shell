@@ -1,5 +1,6 @@
 # simple_shell
 **Ghost Shell**
+
 Ghost Shell also known as the shell is a simple command line prompt that takes the most basics of commands that are present in the bash shell and runs them an dit was built as a project for Holberton school.
 `The shell` works like bash and any other basic shells.
 **Example of how to launch the shell after compiling:**
@@ -71,8 +72,9 @@ To exit out of a command or process the user can use ``ctrl c``. ``Control c`` s
 
 ``utility_functions.c``: helper functions.
 
-**Comments**
+
 **Authors**
 
-.Bradley mwangangi.
+.Bradley mwangangi
+
 .Bryan sine
