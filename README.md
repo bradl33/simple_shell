@@ -35,11 +35,11 @@ There are two builtins programmed into the shell. Below is a description and use
 To exit out of a command or process the user can use ``ctrl c``. ``Control c`` stops a process and causes it to abort. The user can also utilize the command ``ctrl D`` which will just exit. When the command ``ctrl D`` is used an exit status of 0 is given. Using exit, you can input its exit status or it is defaulted to the status of the last command executed.
 **Files**
 
-``README.md` : Current file, contains information about this project
+``README.md`` : Current file, contains information about this project
 ``holberton.h`` : Header file, contains all prototypes for funcitons used, as well as libriaries
 ``hsh.c``: Main file that uses most functions and executes them within this file
 ``ghostinshell.png``: Image in readme file
-``_getenv.c`` : Contains the code for _printf
+``_getenv.c`` : It Contains the code for _printf
 ``_getline.c``: File for getting prompt and user input
 ``which.c``: File containing the specific functions for conversion specifiers
 ``builtin_execute.c``: Executing the builtins
