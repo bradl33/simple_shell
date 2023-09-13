@@ -16,13 +16,21 @@ The shell also contains two builtins which are commands that are within the shel
 **Compilation**
 All files will be compiled with the following: ``$ gcc -Wall -Werror -Wextra -pedantic *.c``
 **List of useful commands**
+
 1.``cat`` - prints and concatenates files to the standard output.
+
 2.``cp`` -copies a file into another file.
+
 3.``grep`` - helps to search for a file in a specific pattern.
+
 4.``less`` - will let you go backward and forward in the files.
+
 5.``ls`` - will list all files and directories in current working directory.
+
 6. ``mv`` - helps to move one file into another file.
+
 7. ``pwd`` - given you the current working directory
+
 **Builtins**
 There are two builtins programmed into the shell. Below is a description and use for each builtin.
 
@@ -36,20 +44,35 @@ To exit out of a command or process the user can use ``ctrl c``. ``Control c`` s
 **Files**
 
 ``README.md`` : Current file, contains information about this project
+
 ``holberton.h`` : Header file, contains all prototypes for funcitons used, as well as libriaries
+
 ``hsh.c``: Main file that uses most functions and executes them within this file
+
 ``ghostinshell.png``: Image in readme file
+
 ``_getenv.c`` : It Contains the code for _printf
+
 ``_getline.c``: File for getting prompt and user input
+
 ``which.c``: File containing the specific functions for conversion specifiers
+
 ``builtin_execute.c``: Executing the builtins
+
 ``builtins.c``: File containing the two builtins
+
 ``child.c``: File that forks and creates parent child processee
+
 ``free.c``: File with free malloc functions
+
 ``prompt.c``: File with actual prompt line $
+
 ``tokenizer.c``: File that creates function to tokenize an array of strings
+
 ``utility_functions.c``: helper functions.
+
 **Comments**
 **Authors**
-Bradley mwangangi.
-Bryan sine.
+
+.Bradley mwangangi.
+.Bryan sine
