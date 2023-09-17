@@ -1,27 +1,30 @@
 #include "shell.h"
 
-char **tokenize_line(char *line, int *token_count) {
-    char **tokens_arr = NULL;
-    char *token;
+char **tokenize_line(char *line, int *token_count)
+{
+char **tokens_arr = NULL;
+char *token;
 
-    *token_count = 0;
+	*token_count = 0;
 
-    token = strtok(line, " \n");
-    while (token != NULL) {
-        tokens_arr = (char **)realloc(tokens_arr, (*token_count + 2) * sizeof(char *));
-        
-        if (tokens_arr == NULL) {
-            perror("memory allocation error.");
-            exit(EXIT_FAILURE);
-        }
-        
-        tokens_arr[*token_count] = strdup(token);
+	token = strtok(line, " \n");
+	while (token != NULL)
+	{
+		tokens_arr = (char **)realloc(tokens_arr, (*token_count + 2) * sizeof(char *));
 
-        (*token_count)++;
-        token = strtok(NULL, " \n");
-    }
-    tokens_arr[*token_count] = NULL;
-    return (tokens_arr);
+	if (tokens_arr == NULL)
+	{
+		perror("memory allocation error.");
+	exit(EXIT_FAILURE);
+	}
+
+	tokens_arr[*token_count] = strdup(token);
+
+		(*token_count)++;
+	token = strtok(NULL, " \n");
+	}
+	tokens_arr[*token_count] = NULL;
+return (tokens_arr);
 }
 
 #if 0
