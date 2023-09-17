@@ -16,6 +16,11 @@ ssize_t _getline(char **lineptr, size_t *n);
 char **tokenize_line(char *line, int *token_count);
 void free_tokens_arr(char **tokens_arr, int token_count, char *line);
 
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
+char *_strdup(char *str);
+int _strlen(char *str);
+
 int exit_builtin(char **tokens_arr, int token_count);
 int env_builtin(char **tokens_arr);
 int cd_builtin(char **tokens_arr);
