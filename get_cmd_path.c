@@ -1,4 +1,5 @@
 #include "shell.h"
+#include <sys/stat.h>
 
 char *get_cmd_path(char *command) {
     char *path = getenv("PATH");
@@ -9,7 +10,6 @@ char *get_cmd_path(char *command) {
     if (path != NULL) {
         path_copy = strdup(path);
         if (path_copy == NULL) {
-            perror("Error: Memory allocation failed");
             return NULL;
         }
 
@@ -21,7 +21,6 @@ char *get_cmd_path(char *command) {
             file_path = malloc(dir_length + cmd_length + 2);
 
             if (file_path == NULL) {
-                perror("Error: Memory allocation failed");
                 free(path_copy);
                 return NULL;
             }
