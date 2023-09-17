@@ -1,44 +1,30 @@
 #include "shell.h"
 
 int main(int argc, char *argv[]) {
-    char *line = NULL;
     char **tokens_arr = NULL;
-    size_t len = 0;
+    char *line, *program_name, *command_name, *cmd_path;
+    size_t len;
     ssize_t read;
-    int token_count = 0;
-    int exit_code, status = 0;
+    int token_count, exit_code, status, command_num;
     bool exiting = false;
-    char *program_name, *command_name, *cmd_path;
+
+    line = NULL;
+    len = token_count = status = command_num = 0;
 
     (void)argc;
-    /*
-    (void)program_name;
-    (void)command_name;
-    */
 
     while (1) {
-        /* printf("Enter a line of text:\n"); */
+        command_num++;
         read = _getline(&line, &len);
 
         if (read != -1) {
-            /* printf("Line: %s\n", line); */
-
             tokens_arr = tokenize_line(line, &token_count);
 
             program_name = argv[0];
             command_name = tokens_arr[0];
 
-            #if 0
-            for (i = 0; i < token_count; i++) {
-                printf("Token %d: %s\n", i, tokens_arr[i]);
-            }
-            #endif
-
             /* handle exit here as is a special case compared to other builtins */
             if (strcmp(tokens_arr[0], "exit") == 0) {
-
-                /* exit_code = handle_exit(tokens_arr, token_count, line, program_name, command_name, &exit_code, &exiting); */
-
                 if (token_count > 2 && atoi(tokens_arr[1]) != 0) {
                     fprintf(stderr, "%s\n", command_name);
                     fprintf(stderr, "%s: %s: too many arguments\n", program_name, command_name);

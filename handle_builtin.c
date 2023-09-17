@@ -44,7 +44,7 @@ int execute_builtin(char **tokens_arr) {
         }
     }
 
-    fprintf(stderr, "Command not found: %s\n", tokens_arr[0]);
+    perror("Command not found");
 
     return (1);
 }
