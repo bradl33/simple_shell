@@ -31,13 +31,13 @@ int main(int argc, char *argv[]) {
 
                     free_tokens_arr(tokens_arr, token_count, line);
                     line = NULL;
-                    
+
                     return (1);
                 }
                 exit_code = exit_builtin(tokens_arr, token_count);
                 exiting = true; /* exit is ready. Will be executed after free(s)*/
             }
-            
+
             if(!exiting) {
                 if (is_builtin_command(tokens_arr[0])) {
                     execute_builtin(tokens_arr);

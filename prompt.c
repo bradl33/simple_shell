@@ -1,7 +1,9 @@
 #include "shell.h"
 
-void prompt(void) {
-	if (isatty(STDIN_FILENO)) {
-        write(STDOUT_FILENO, "$ ", _strlen("$ "));
-    }
+void prompt(void)
+{
+	if (isatty(STDIN_FILENO))
+	{
+		write(STDOUT_FILENO, "$ ", _strlen("$ "));
+	}
 }
