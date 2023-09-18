@@ -75,6 +75,4 @@ To exit out of a command or process the user can use ``ctrl c``. ``Control c`` s
 
 **Authors**
 
-.Bradley mwangangi
-
-.Bryan sine
+**Bradley mwangangi** and **Bryan sine**, Software Engineering students at ALX, have jointly developed the simple shell. A simple UNIX command interpreter
