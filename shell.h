@@ -10,9 +10,12 @@
 #include<unistd.h>
 #include<limits.h>
 #include<stdbool.h>
+#include<signal.h>
 
+void _sigint(int signal);
 void prompt(void);
-ssize_t _getline(char **lineptr, size_t *n);
+char *_getline(char **lineptr, FILE *stream);
+char *_memcpy(char *dest, char *src, unsigned int n);
 char **tokenize_line(char *line, int *token_count);
 void free_tokens_arr(char **tokens_arr, int token_count, char *line);
 

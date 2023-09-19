@@ -1,60 +1,60 @@
 #include "shell.h"
 
-ssize_t _getline(char **lineptr, size_t *n) {
-    size_t buffer_size = *n, line_length = 0;
-    char c, *line = *lineptr, *new_line = NULL;
-    int leading_space = 0;
+char *_getline(char **lineptr, FILE *stream) {
+    static char buffer[BUFFER];
+    static int current_buffer = BUFFER;
+    static int i, chars_read;
+    int Lsize = 0;
+    char c;
+    char *new_lineptr;
 
-    if (lineptr == NULL) {
-        perror("Invalid arguments.");
-        return (-1);
-    }
-    prompt();
-    /* check for and skip leading whitespace */
-    while (read(STDIN_FILENO, &c, 1) != -1 && c != '\n') {
-        if (c == ' ' || c == '\t') {
-            leading_space++;
-            continue;
-        } else
-            break;
-    }
-    if (c == '\n')
-        return (-1);
-
-    /* Check if the buffer is large enough */
-    if (line == NULL || buffer_size == 0) {
-        buffer_size = BUFFER; /* Initial buffer size 1024 */
-        line = (char *)malloc(buffer_size);
-        if (line == NULL) {
-            perror("Memory allocation error");
-            return (-1);
+    if (*lineptr == NULL)
+    {
+        *lineptr = malloc(current_buffer * sizeof(char));
+        if (*lineptr == NULL)
+        {
+            perror("memory allocation error");
+            exit(EXIT_FAILURE);
         }
     }
 
-    line[line_length++] = (char)c; /* store beginning char to line */
-
-    /* continue with subsequent chars */
-    while (read(STDIN_FILENO, &c, 1) != -1 && c != '\n') {
-        if (line_length + 1 >= buffer_size) {
-            buffer_size *= 2; /* Resize the buffer if it's not large enough */
-            new_line = (char *)malloc(buffer_size);
-            if (new_line == NULL) {
-                perror("Memory allocation error");
-                free(line);
-                return (-1); /* Memory allocation error */
+    while (1)
+    {
+        if (i == chars_read)
+        {
+            chars_read = read(fileno(stream), buffer, BUFFER);
+            if (chars_read == -1)
+            {
+                perror("read error");
+                exit(EXIT_FAILURE);
             }
-            line = new_line;
-            free(new_line);
+            if (chars_read == 0){
+                write(STDOUT_FILENO, "\n", 1);
+                exit(EXIT_SUCCESS);
+            }
+            i = 0;
         }
-
-        if (line != new_line)
-            free(new_line);
-        line[line_length++] = (char)c; /* store subsequent chars in line */
+        c = buffer[i++];
+        if (c == '\n')
+        {
+            (*lineptr)[Lsize] = '\0';
+            break;
+        }
+        if (Lsize + 1 == current_buffer)
+        {
+            current_buffer *= 2;
+            new_lineptr = malloc(current_buffer * sizeof(char));
+            if (new_lineptr == NULL)
+            {
+                perror("memory allocation error");
+                exit(EXIT_FAILURE);
+            }
+            _memcpy(new_lineptr, *lineptr, Lsize);
+            free(*lineptr);
+            *lineptr = new_lineptr;
+        }
+        (*lineptr)[Lsize] = c;
+         Lsize++;
     }
-
-    line[line_length] = '\0'; /* Null-terminate the string */
-    *lineptr = line;
-    *n = buffer_size;
-
-    return (line_length);
+    return (*lineptr);
 }

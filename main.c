@@ -3,21 +3,26 @@
 int main(int argc, char *argv[]) {
     char **tokens_arr = NULL;
     char *line, *program_name, *command_name, *cmd_path;
-    size_t len, command_num;
-    ssize_t read;
+    size_t command_num;
+    char *read;
     int token_count, exit_code, status;
     bool exiting = false;
 
+    signal(SIGINT, _sigint);
     line = NULL;
-    len = token_count = status = command_num = 0;
+    token_count = status = command_num = 0;
 
     (void)argc;
 
     while (1) {
         command_num++;
-        read = _getline(&line, &len);
-
-        if (read != -1) {
+        if(isatty(STDIN_FILENO) == 1)
+            prompt();
+        read = _getline(&line, stdin);
+    
+        if (strcmp(read, "") == 0) {
+            continue;
+        } else {
             tokens_arr = tokenize_line(line, &token_count);
 
             program_name = argv[0];
@@ -49,11 +54,10 @@ int main(int argc, char *argv[]) {
                             
                         }
                         else
-                           err_not_found(program_name, command_num, command_name);
+                           status = err_not_found(program_name, command_num, command_name);
                     }
                 }
             }
-
             free_tokens_arr(tokens_arr, token_count, line);
             line = NULL;
         }

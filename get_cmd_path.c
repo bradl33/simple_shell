@@ -10,7 +10,7 @@ char *get_cmd_path(char *command) {
     path_copy = path_token = file_path = NULL;
 
     if (path != NULL) {
-        path_copy = _strdup(path);
+        path_copy = strdup(path);
         if (path_copy == NULL) {
             return (NULL);
         }
@@ -18,8 +18,8 @@ char *get_cmd_path(char *command) {
         path_token = strtok(path_copy, ":");
 
         while (path_token != NULL) {
-            cmd_length = _strlen(command);
-            dir_length = _strlen(path_token);
+            cmd_length = strlen(command);
+            dir_length = strlen(path_token);
             file_path = malloc(dir_length + cmd_length + 2);
 
             if (file_path == NULL) {
@@ -27,9 +27,9 @@ char *get_cmd_path(char *command) {
                 return (NULL);
             }
 
-            _strcpy(file_path, path_token);
-            _strcat(file_path, "/");
-            _strcat(file_path, command);
+            strcpy(file_path, path_token);
+            strcat(file_path, "/");
+            strcat(file_path, command);
             file_path[dir_length + cmd_length + 1] = '\0';
 
             if (stat(file_path, &buffer) == 0) {
