@@ -40,7 +40,7 @@ char *_strcpy(char *dest, char *src)
 
 char *_strdup(char *str)
 {
-	char *dup_str;
+	char *dup_str = NULL;
 	unsigned int i, len;
 
 	i = len = 0;
@@ -70,4 +70,30 @@ int _strlen(char *str)
 	i++;
 
 	return (i);
+}
+
+char *_itos(size_t command_num)
+{
+	size_t num = command_num;
+	int digits_in_num = 0;
+	char *string = NULL;
+	do {
+		num /= 10;
+		digits_in_num++;
+	} while (num > 0);
+
+	string = (char*)malloc(digits_in_num + 1);
+
+	if (string == NULL)
+		return (NULL);
+
+	string[digits_in_num] = '\0';
+
+	do {
+		digits_in_num--;
+		string[digits_in_num] = '0' + (command_num % 10);
+		command_num /= 10;
+	} while (digits_in_num > 0);
+
+	return (string);
 }

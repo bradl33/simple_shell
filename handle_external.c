@@ -12,6 +12,7 @@ int execute_external(char *cmd_path, char **tokens_arr) {
     }
 
     if (pid == 0) {
+        
         /* execute execve and check if error */
         if (execve(cmd_path, tokens_arr, __environ) == -1) {
             return (-1);
@@ -26,5 +27,5 @@ int execute_external(char *cmd_path, char **tokens_arr) {
             return(status);
     }
 
-    return 0;
+    return (0);
 }

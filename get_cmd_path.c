@@ -7,6 +7,8 @@ char *get_cmd_path(char *command) {
     int cmd_length, dir_length;
     struct stat buffer;
 
+    path_copy = path_token = file_path = NULL;
+
     if (path != NULL) {
         path_copy = _strdup(path);
         if (path_copy == NULL) {

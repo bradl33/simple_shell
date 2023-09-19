@@ -3,9 +3,9 @@
 int main(int argc, char *argv[]) {
     char **tokens_arr = NULL;
     char *line, *program_name, *command_name, *cmd_path;
-    size_t len;
+    size_t len, command_num;
     ssize_t read;
-    int token_count, exit_code, status, command_num;
+    int token_count, exit_code, status;
     bool exiting = false;
 
     line = NULL;
@@ -26,9 +26,6 @@ int main(int argc, char *argv[]) {
             /* handle exit here as is a special case compared to other builtins */
             if (strcmp(tokens_arr[0], "exit") == 0) {
                 if (token_count > 2 && atoi(tokens_arr[1]) != 0) {
-                    fprintf(stderr, "%s\n", command_name);
-                    fprintf(stderr, "%s: %s: too many arguments\n", program_name, command_name);
-
                     free_tokens_arr(tokens_arr, token_count, line);
                     line = NULL;
 
@@ -43,21 +40,23 @@ int main(int argc, char *argv[]) {
                     execute_builtin(tokens_arr);
                 } else {
                     if(strchr(tokens_arr[0], '/') != NULL) {
-                        execute_external(tokens_arr[0], tokens_arr);
+                        status = execute_external(tokens_arr[0], tokens_arr);
                         exit(status);
                     } else {
                         cmd_path = get_cmd_path(tokens_arr[0]);
                         if (cmd_path != NULL) {
-                            execute_external(cmd_path, tokens_arr);
+                            status = execute_external(cmd_path, tokens_arr);
+                            
                         }
+                        else
+                           err_not_found(program_name, command_num, command_name);
                     }
                 }
             }
+
             free_tokens_arr(tokens_arr, token_count, line);
             line = NULL;
-            command_name = NULL;
         }
-
         if (exiting)
             exit(exit_code);
     }
