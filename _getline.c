@@ -37,7 +37,7 @@ char *_getline(char **lineptr, FILE *stream)
 				exit(EXIT_FAILURE);
 			}
 			if (chars_read == 0)
-				exit(EXIT_SUCCESS);
+				return (NULL);
 			i = 0;
 		}
 		c = buffer[i++];

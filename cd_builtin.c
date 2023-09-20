@@ -20,13 +20,11 @@ int cd_builtin(char **tokens_arr)
 
 		if (chdir(home_dir) != 0)
 			return (2);
-		else
-			perror("Some error");
 	}
 	else
 	{
 		if (chdir(tokens_arr[1]) != 0)
-			return (2);
+			return (1);
 	}
 	return (0);
 }

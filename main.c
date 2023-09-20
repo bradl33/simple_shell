@@ -5,7 +5,7 @@
  * @argc: argument count
  * @argv: argument vector
  *
- * Return: command execution status or or exit_code
+ * Return: command execution status or exit_code
 */
 int main(int argc, char *argv[])
 {
@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
 	char *read;
 	int token_count, exit_code, status;
 	bool exiting = false;
-	char *str_exit_code, *exit_arg = NULL;
+	char *str_exit_code;
 
 	signal(SIGINT, _sigint);
 	line = NULL;
@@ -29,6 +29,12 @@ int main(int argc, char *argv[])
 		if (isatty(STDIN_FILENO) == 1)
 			prompt();
 		read = _getline(&line, stdin);
+
+		if (!read) /* EOF CTRL + D */
+		{
+			free(line);
+			exit(0);
+		}
 
 		if (_strcmp(read, "") == 0)
 			continue;
@@ -50,9 +56,8 @@ int main(int argc, char *argv[])
 				}
 				if (token_count == 2 && atoi(tokens_arr[1]) == 0)
 				{
-					exit_arg = tokens_arr[1];
-					err_exit_illegal_num(argv[0], command_num, exit_arg);
-					exit(2);
+					exit_code = err_exit_illegal_num(argv[0], command_num, tokens_arr[1]);
+					exiting = true;
 				}
 				exit_code = exit_builtin(tokens_arr, token_count);
 				exiting = true; /* exit is ready. Will be executed after free(s)*/
@@ -64,16 +69,21 @@ int main(int argc, char *argv[])
 					status = execute_builtin(tokens_arr);
 				else
 				{
-					cmd_path = get_cmd_path(tokens_arr[0]);
-					if (cmd_path != NULL)
-					{
-						status = execute_external(cmd_path, tokens_arr);
-						free(cmd_path);
-					}
+					if (_strchr(tokens_arr[0], '/') != NULL)
+						status = execute_external(tokens_arr[0], tokens_arr);
 					else
 					{
-						status = err_not_found(argv[0], command_num, command_name);
-						exit(status);
+						cmd_path = get_cmd_path(tokens_arr[0]);
+						if (cmd_path != NULL)
+						{
+							status = execute_external(cmd_path, tokens_arr);
+							free(cmd_path);
+						}
+						else
+						{
+							status = err_not_found(argv[0], command_num, command_name);
+							exiting = true;
+						}
 					}
 				}
 				exit_code = status;
@@ -90,9 +100,8 @@ int main(int argc, char *argv[])
 				exit_code = -exit_code;
 				str_exit_code = _itos(exit_code);
 
-				err_exit_illegal_num(argv[0], command_num, str_exit_code);
+				exit_code = err_exit_illegal_num(argv[0], command_num, str_exit_code);
 				free(str_exit_code);
-				exit(2);
 			}
 			exit(exit_code);
 		}
