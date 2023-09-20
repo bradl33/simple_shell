@@ -66,7 +66,10 @@ int main(int argc, char *argv[])
 				{
 					cmd_path = get_cmd_path(tokens_arr[0]);
 					if (cmd_path != NULL)
+					{
 						status = execute_external(cmd_path, tokens_arr);
+						free(cmd_path);
+					}
 					else
 					{
 						status = err_not_found(argv[0], command_num, command_name);
@@ -88,6 +91,7 @@ int main(int argc, char *argv[])
 				str_exit_code = _itos(exit_code);
 
 				err_exit_illegal_num(argv[0], command_num, str_exit_code);
+				free(str_exit_code);
 				exit(2);
 			}
 			exit(exit_code);
