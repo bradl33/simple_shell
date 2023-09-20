@@ -64,18 +64,13 @@ int main(int argc, char *argv[])
 					status = execute_builtin(tokens_arr);
 				else
 				{
-					if (_strchr(tokens_arr[0], '/') != NULL)
-						status = execute_external(tokens_arr[0], tokens_arr);
+					cmd_path = get_cmd_path(tokens_arr[0]);
+					if (cmd_path != NULL)
+						status = execute_external(cmd_path, tokens_arr);
 					else
 					{
-						cmd_path = get_cmd_path(tokens_arr[0]);
-						if (cmd_path != NULL)
-							status = execute_external(cmd_path, tokens_arr);
-						else
-						{
-						   status = err_not_found(argv[0], command_num, command_name);
-						   exit(status);
-						}
+						status = err_not_found(argv[0], command_num, command_name);
+						exit(status);
 					}
 				}
 				exit_code = status;
@@ -83,11 +78,6 @@ int main(int argc, char *argv[])
 			free_tokens_arr(tokens_arr, token_count, line);
 			line = NULL;
 		}
-		/**
-		* if(!isatty(STDIN_FILENO)) {
-		*	exiting = true;
-		* }
-		*/
 		if (exiting)
 		{
 			/* handle illegal number in exit */

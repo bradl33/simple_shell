@@ -35,8 +35,6 @@ char **tokenize_line(char *line, int *token_count)
 		}
 
 		new_tokens_arr[*token_count] = _strdup(token);
-		/* new_tokens_arr[*token_count + 1] = NULL; */
-
 		tokens_arr = new_tokens_arr;
 		tokens_arr[*token_count + 1] = NULL;
 		(*token_count)++;

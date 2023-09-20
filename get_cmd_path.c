@@ -15,6 +15,9 @@ char *get_cmd_path(char *command)
 	int cmd_length, dir_length;
 	struct stat buffer;
 
+	if(_strchr(command, '/') != NULL)
+		return (command);
+
 	path_copy = path_token = file_path = NULL;
 
 	if (path != NULL)

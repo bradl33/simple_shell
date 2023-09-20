@@ -26,7 +26,6 @@ int execute_external(char *cmd_path, char **tokens_arr)
 	} else
 	{
 		wait(&status);
-		/* free(cmd_path); */
 		if (WIFEXITED(status))
 		{
 			status = WEXITSTATUS(status);

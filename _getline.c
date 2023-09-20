@@ -13,8 +13,7 @@ char *_getline(char **lineptr, FILE *stream)
 	static int current_buffer = BUFFER;
 	static int i, chars_read;
 	int Lsize = 0, j;
-	char c;
-	char *new_lineptr;
+	char c, *new_lineptr;
 	bool one_midspace = false;
 
 	if (*lineptr == NULL)
@@ -38,18 +37,13 @@ char *_getline(char **lineptr, FILE *stream)
 				exit(EXIT_FAILURE);
 			}
 			if (chars_read == 0)
-			{
-				/* write(STDOUT_FILENO, "\n", 1); */
 				exit(EXIT_SUCCESS);
-			}
 			i = 0;
 		}
 		c = buffer[i++];
 		if (c == ' ' && i >= 1)
 		{
-			if (i < 2)
-				continue;
-			if ((buffer[i - 2] != ' ') && one_midspace == false)
+			if ((buffer[i - 2] != ' ') && !one_midspace && i >= 2)
 			{
 				(*lineptr)[Lsize] = c;
 				Lsize++;
@@ -61,20 +55,10 @@ char *_getline(char **lineptr, FILE *stream)
 		{
 			j = i;
 			while (j < chars_read && buffer[j] == ' ')
-			{
 				j++;
-			}
 
-			if (j == chars_read)
-			{
-				(*lineptr)[Lsize] = '\0';
-				break;
-			} else
-			{
-				(*lineptr)[Lsize] = '\0';
-				break;
-			}
-
+			(*lineptr)[Lsize] = '\0';
+			break;
 		}
 		if (Lsize + 1 == current_buffer)
 		{
