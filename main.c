@@ -54,7 +54,7 @@ int main(int argc, char *argv[])
 			if (!exiting)
 			{
 				if (is_builtin_command(tokens_arr[0]))
-					execute_builtin(tokens_arr);
+					status = execute_builtin(tokens_arr);
 				else
 				{
 					if (strchr(tokens_arr[0], '/') != NULL)
@@ -64,7 +64,8 @@ int main(int argc, char *argv[])
 						cmd_path = get_cmd_path(tokens_arr[0]);
 						if (cmd_path != NULL)
 							status = execute_external(cmd_path, tokens_arr);
-						else {
+						else
+						{
 						   status = err_not_found(argv[0], command_num, command_name);
 						   exit(status);
 						}
@@ -95,5 +96,5 @@ int main(int argc, char *argv[])
 			exit(exit_code);
 		}
 	}
-	return (0);
+	return (exit_code);
 }
