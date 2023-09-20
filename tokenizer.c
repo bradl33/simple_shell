@@ -1,6 +1,12 @@
 #include "shell.h"
-#define BUFFER_SIZE 1024
 
+/**
+ * tokenize_line - splits a line into tokens
+ * @line: line to be tokenized
+ * @token_count: count of tokens
+ *
+ * Return: array of tokens
+*/
 char **tokenize_line(char *line, int *token_count)
 {
 	char **tokens_arr = NULL, **new_tokens_arr = NULL;

@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * is_builtin_command - checks if command is a builtin command
+ * @command: command to be checked
+ *
+ * Return: 1 if is builtin, 0 if otherwise
+*/
 int is_builtin_command(char *command)
 {
 	char *builtin_func_list[] = {
@@ -23,6 +29,12 @@ int is_builtin_command(char *command)
 	return (0);
 }
 
+/**
+ * execute_builtin - executes builtin command
+ * @tokens_arr: array of tokens with command to be executed
+ *
+ * Return:execution status, or 1 if error
+*/
 int execute_builtin(char **tokens_arr)
 {
 	int i, exec_status, num_builtins;

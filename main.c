@@ -1,5 +1,12 @@
 #include "shell.h"
 
+/**
+ * main - runs main code for the simple_shell
+ * @argc: argument count
+ * @argv: argument vector
+ *
+ * Return: command execution status or or exit_code
+*/
 int main(int argc, char *argv[])
 {
 	char **tokens_arr = NULL;
@@ -96,5 +103,5 @@ int main(int argc, char *argv[])
 			exit(exit_code);
 		}
 	}
-	return (exit_code);
+	return (0);
 }

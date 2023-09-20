@@ -1,6 +1,13 @@
 #include "shell.h"
 #include <sys/wait.h>
 
+/**
+ * execute_external - executes external command
+ * @cmd_path: path to command to be executed
+ * @tokens_arr: array of tokens, command being arr[0]
+ *
+ * Return: command execution status, -1 if error
+*/
 int execute_external(char *cmd_path, char **tokens_arr)
 {
 	pid_t pid;
