@@ -1,11 +1,8 @@
 /.vscode
 /TEST_SUITE
-/dir5
-/dir1
 /runchecker.bash
+/dir*
 /hsh
-/dir7
-/dir56
+hsh
 /allowed_functions
 /checker_results*
-hsh

@@ -15,7 +15,7 @@ char *home_dir = getenv("HOME");
 	{
 		if (home_dir == NULL)
 		{
-			perror("Home directory not set");
+			/* perror("Home directory not set"); */
 			return (1);
 		}
 
@@ -28,9 +28,8 @@ char *home_dir = getenv("HOME");
 	{
 		if (chdir(tokens_arr[1]) != 0)
 			return (2);
-		else
-			perror("Some second error");
+		/* else */
+			/* perror("Some second error"); */
 	}
 	return (0);
 }
-

@@ -20,8 +20,10 @@ int execute_external(char *cmd_path, char **tokens_arr)
 	{
 		wait(&status);
 		/* free(cmd_path); */
-		if (WIFEXITED(status))
+		if (WIFEXITED(status)) {
 			status = WEXITSTATUS(status);
+			return (status);
+		}
 
 		if (!isatty(STDIN_FILENO))
 			return (status);
