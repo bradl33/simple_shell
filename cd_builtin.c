@@ -21,11 +21,15 @@ char *home_dir = getenv("HOME");
 
 		if (chdir(home_dir) != 0)
 			return (2);
+		else
+			perror("Some error");
 	}
 	else
 	{
 		if (chdir(tokens_arr[1]) != 0)
 			return (2);
+		else
+			perror("Some second error");
 	}
 	return (0);
 }

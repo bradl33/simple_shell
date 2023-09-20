@@ -34,6 +34,8 @@ int execute_builtin(char **tokens_arr);
 
 char *get_cmd_path(char *command);
 int execute_external(char *cmd_path, char **tokens_arr);
+
+void err_exit_illegal_num(char *program_name, size_t command_num, char *exit_arg);
 int err_not_found(char *program_name, size_t command_num, char *command_name);
 
 int handle_exit(char **tokens_arr, int token_count, char *line, char *program_name, char *command_name, int *exit_code, bool *exiting);

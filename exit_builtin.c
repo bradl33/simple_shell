@@ -16,10 +16,15 @@ int exit_builtin(char **tokens_arr, int token_count)
 	int exit_code = SUCCESS_EXIT_CODE;
 	int ret_val; /* return value by atoi */
 
+	if (tokens_arr[1] == 0)
+		exit_code = SUCCESS_EXIT_CODE;
+
+	/* handles exit value argument */
 	if (token_count > 1)
 	{
 		ret_val = atoi(tokens_arr[1]);
 
+		/* if exit argument successfully converted to int */
 		if (ret_val != 0)
 			exit_code = ret_val;
 		else
