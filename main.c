@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 			prompt();
 		read = _getline(&line, stdin);
 
-		if (strcmp(read, "") == 0)
+		if (_strcmp(read, "") == 0)
 			continue;
 		else
 		{
@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 			command_name = tokens_arr[0];
 
 			/* handle exit here as is a special case compared to other builtins */
-			if (strcmp(tokens_arr[0], "exit") == 0)
+			if (_strcmp(tokens_arr[0], "exit") == 0)
 			{
 				if (token_count > 2 && atoi(tokens_arr[1]) != 0)
 				{
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
 					status = execute_builtin(tokens_arr);
 				else
 				{
-					if (strchr(tokens_arr[0], '/') != NULL)
+					if (_strchr(tokens_arr[0], '/') != NULL)
 						status = execute_external(tokens_arr[0], tokens_arr);
 					else
 					{

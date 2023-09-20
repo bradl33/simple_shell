@@ -22,7 +22,7 @@ int is_builtin_command(char *command)
 
 	for (i = 0; i < num_builtins; i++)
 	{
-		if (strcmp(command, builtin_func_list[i]) == 0)
+		if (_strcmp(command, builtin_func_list[i]) == 0)
 			return (1);
 	}
 
@@ -51,7 +51,7 @@ int execute_builtin(char **tokens_arr)
 
 	for (i = 0; i < num_builtins; i++)
 	{
-		if (strcmp(tokens_arr[0], builtin_func_list[i]) == 0)
+		if (_strcmp(tokens_arr[0], builtin_func_list[i]) == 0)
 		{
 			if (i == 0)
 				exec_status = cd_builtin(tokens_arr);
